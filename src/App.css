@@ -1,0 +1,16 @@
+.memory {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 800px;
+  margin: auto;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h1 {
+  display: flex;
+}
