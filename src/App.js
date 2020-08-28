@@ -1,30 +1,72 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import shuffle from 'lodash.shuffle'
 import Card from'./Card'
 
+import im1 from './images/im1.jpg'
+import im2 from './images/im2.jpg'
+import im3 from './images/im3.jpg'
+import im4 from './images/im4.jpg'
+import im5 from './images/im5.jpg'
+import im6 from './images/im6.jpg'
+
+const HEIGHT = 3
+const WIDTH = 4
+const SYMBOLS = [
+  im1,
+  im2,
+  im3,
+  im4,
+  im5,
+  im6
+]
+
+
 class App extends Component {
+
+  state = {
+    cards: this.generateCards(),
+  }
+
+  generateCards() {
+    console.log("Fonction generateCards")
+
+
+    const result = []
+    const size = HEIGHT * WIDTH
+    const candidates = shuffle(SYMBOLS)
+    console.log("Variables Début : ")
+    console.log("result : "+ result)
+    console.log("size : " + size)
+    console.log("candidates : " + candidates)
+    while (result.length < size) {
+      const im = candidates.pop()
+      console.log("image : " + im)
+      result.push(im, im)
+    }
+
+    console.log("Variables fin : ")
+    console.log("result : " + result)
+    return shuffle(result)
+  
+  }
+
   render(){
+    console.log("render de APP")
+    const {cards} = this.state
+    console.log("Etat de app : " + cards)
     return(
       
       <div className="memory">
         <h1>Memory</h1>
         <div className="board">
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-        </div>
-          
-          
+          {cards.map((card, index) => (
+            <Card
+              image= {card}
+              key= {index}
+            />
+          ))}
+        </div>       
       </div>
     )
     
