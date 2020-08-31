@@ -26,6 +26,7 @@ class App extends Component {
 
   state = {
     cards: this.generateCards(),
+    currentPair: []
   }
 
   generateCards() {
@@ -51,14 +52,40 @@ class App extends Component {
   
   }
 
-  handleCardClick = (index) => {
+  handleCardClick = index => {
+    console.log("Entrée HandleCardClick")
+
+    const { currentPair } = this.state
+
+    console.log("CurrentPair : " + currentPair)
+
     console.log(index, this)
+
+    this.setState({currentPair: [index]})
+    console.log("CurrentPair : " + currentPair)
     
   }
 
+  getCardFeedBack(index) {
+    console.log("Entrée dans getCardFeedback")
+
+    const { currentPair } = this.state
+
+    console.log("CurrentPair : " + currentPair)
+
+    if (currentPair.includes(index)) {
+      console.log("Carte retournée")
+      return 'visible'
+    } else {
+      return 'hidden'
+    }
+    
+  }
+
+
   render(){
     console.log("render de APP")
-    const {cards} = this.state
+    const {cards, currentPair} = this.state
     console.log("Etat de app : " + cards)
     return(
       
@@ -68,6 +95,7 @@ class App extends Component {
           {cards.map((card, index) => (
             <Card
               image= {card}
+              feedback= {this.getCardFeedBack(index)}
               index = {index}
               key= {index}
               onClick = {this.handleCardClick}
