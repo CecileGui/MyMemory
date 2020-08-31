@@ -6,7 +6,7 @@ import './Card.css'
 
 function Card ({image, feedback, index, onClick}) {
     return (
-        <div className={`card ${feedback}`} onClick= {() => onClick(image)}>
+        <div className={`card ${feedback}`} onClick= {() => onClick(index)}>
             <img src={image} className={feedback} alt='La jolie fleur'/>
             
         </div>

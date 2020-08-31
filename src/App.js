@@ -51,8 +51,9 @@ class App extends Component {
   
   }
 
-  handleCardClick(card) {
-    console.log(card, "clicked")
+  handleCardClick = (index) => {
+    console.log(index, this)
+    
   }
 
   render(){
@@ -67,6 +68,7 @@ class App extends Component {
           {cards.map((card, index) => (
             <Card
               image= {card}
+              index = {index}
               key= {index}
               onClick = {this.handleCardClick}
             />
