@@ -51,6 +51,10 @@ class App extends Component {
   
   }
 
+  handleCardClick(card) {
+    console.log(card, "clicked")
+  }
+
   render(){
     console.log("render de APP")
     const {cards} = this.state
@@ -64,6 +68,7 @@ class App extends Component {
             <Card
               image= {card}
               key= {index}
+              onClick = {this.handleCardClick}
             />
           ))}
         </div>       

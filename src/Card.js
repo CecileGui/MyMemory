@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import './Card.css'
 
 
-function Card ({image, feedback, index}) {
+function Card ({image, feedback, index, onClick}) {
     return (
-        <div className={`card ${feedback}`}>
+        <div className={`card ${feedback}`} onClick= {() => onClick(image)}>
             <img src={image} className={feedback} alt='La jolie fleur'/>
             
         </div>
@@ -22,7 +22,8 @@ Card.propTypes = {
         'justmacthed',
         'justmismatched'
     ]),
-    index: PropTypes.number
+    index: PropTypes.number,
+    onClick: PropTypes.func
 }
 
 Card.defaultProps = {

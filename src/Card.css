@@ -9,10 +9,6 @@
     border: solid 1px black
 }
 
-.card.hidden {
-    color: blue;
-}
-
 .card > img{
     margin: auto;
     width: 150px;
