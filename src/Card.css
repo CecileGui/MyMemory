@@ -3,6 +3,21 @@
     align-content: center;
     
 }
+.card {
+    width: 170px;
+    margin: 5px;
+    border: solid 1px black
+}
+
+.card.hidden {
+    color: blue;
+}
+
 .card > img{
-    width: 200px;
+    margin: auto;
+    width: 150px;
+}
+
+.card.hidden > img {
+    opacity: 0.2;
 }

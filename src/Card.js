@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import './Card.css'
 
 
-function Card ({image, index}) {
+function Card ({image, feedback, index}) {
     return (
-        <div className='card'>
-            <img src={image} alt='La jolie fleur'/>
+        <div className={`card ${feedback}`}>
+            <img src={image} className={feedback} alt='La jolie fleur'/>
+            
         </div>
     )
 }
@@ -15,7 +16,17 @@ function Card ({image, index}) {
 
 Card.propTypes = {
     card: PropTypes.string,
+    feedback: PropTypes.oneOf([
+        'hidden',
+        'visible',
+        'justmacthed',
+        'justmismatched'
+    ]),
     index: PropTypes.number
+}
+
+Card.defaultProps = {
+    feedback :'hidden'
 }
 
 export default Card
