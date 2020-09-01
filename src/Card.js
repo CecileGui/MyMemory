@@ -15,7 +15,7 @@ function Card ({image, feedback, index, onClick}) {
 
 
 Card.propTypes = {
-    card: PropTypes.string,
+    image: PropTypes.string,
     feedback: PropTypes.oneOf([
         'hidden',
         'visible',

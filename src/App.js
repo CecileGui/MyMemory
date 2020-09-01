@@ -12,6 +12,8 @@ import im6 from './images/im6.jpg'
 
 const HEIGHT = 3
 const WIDTH = 4
+const VISUAL_PAUSE_MSECS = 750
+
 const SYMBOLS = [
   im1,
   im2,
@@ -26,67 +28,72 @@ class App extends Component {
 
   state = {
     cards: this.generateCards(),
-    currentPair: []
+    currentPair: [],
+    indexmatched: [],
   }
 
   generateCards() {
-    console.log("Fonction generateCards")
-
-
     const result = []
     const size = HEIGHT * WIDTH
     const candidates = shuffle(SYMBOLS)
-    console.log("Variables Début : ")
-    console.log("result : "+ result)
-    console.log("size : " + size)
-    console.log("candidates : " + candidates)
+
     while (result.length < size) {
       const im = candidates.pop()
-      console.log("image : " + im)
       result.push(im, im)
     }
 
-    console.log("Variables fin : ")
-    console.log("result : " + result)
     return shuffle(result)
   
   }
 
   handleCardClick = index => {
-    console.log("Entrée HandleCardClick")
 
     const { currentPair } = this.state
 
-    console.log("CurrentPair : " + currentPair)
+    if(currentPair.length === 0) {
+      this.setState({ currentPair: [ index]})
+      return
+    }
 
-    console.log(index, this)
+    if( currentPair.length === 2) {
+      return
+    }
 
-    this.setState({currentPair: [index]})
-    console.log("CurrentPair : " + currentPair)
-    
+    this.handNewPairCloseBy(index)
+
+  }
+
+  handNewPairCloseBy(index){
+    const {cards, currentPair, indexmatched } = this.state
+    const newPair = [currentPair[0], index]
+    this.setState({currentPair: [newPair[0], newPair[1]]})
+
+    if (cards[newPair[0]] === cards[newPair[1]]) {
+      this.setState({indexmatched: [ ...indexmatched, ...newPair]})
+      this.setState({currentPair : []})
+    } else{
+      setTimeout(() => (this.setState({currentPair: []}), VISUAL_PAUSE_MSECS))
+    }
+
   }
 
   getCardFeedBack(index) {
-    console.log("Entrée dans getCardFeedback")
+    const { currentPair, indexmatched } = this.state
 
-    const { currentPair } = this.state
-
-    console.log("CurrentPair : " + currentPair)
-
-    if (currentPair.includes(index)) {
-      console.log("Carte retournée")
-      return 'visible'
-    } else {
-      return 'hidden'
-    }
+    if(indexmatched.includes(index)){ return 'visible'}
+    if(currentPair.includes(index)){return 'visible'}
+    return 'hidden'
+    
     
   }
 
 
   render(){
     console.log("render de APP")
-    const {cards, currentPair} = this.state
-    console.log("Etat de app : " + cards)
+    const {cards, currentPair, indexmatched} = this.state
+    console.log("Etat de app cards: " + cards)
+    console.log("Etat de App currentPair: " + currentPair)
+    console.log("état de indexMatched : " + indexmatched)
     return(
       
       <div className="memory">
