@@ -45,7 +45,7 @@ class App extends Component {
   state = {
     cards: this.generateCards(),
     currentPair: [],
-    indexmatched: [],
+    indexmatched: []
   }
 
   /**
@@ -119,7 +119,6 @@ class App extends Component {
         this.setState({currentPair: []})
       }, VISUAL_PAUSE_MSECS);
     }
-
     console.log("------------------------------------------------------------ Fonction handNewPairCloseBy fin")
   }
 
@@ -138,10 +137,25 @@ class App extends Component {
     
   }
 
+  /**
+   * Surveille si la partie est gagnée
+   * Condition de victoire : toutes les cartes sont retournées
+   */
+  isTheGameOver() {
+    console.log("FONCTION IS THE GAME OVER")
+    
+    const {cards, indexmatched } = this.state
+    console.log("indexMatched.length : " + indexmatched.length)
+    if( indexmatched.length === cards.length){
+      return true
+    }
+    return false
+  }
 
   render(){
     console.log("render de APP")
     const {cards, currentPair, indexmatched} = this.state
+    const victory = this.isTheGameOver()
     console.log("Etat de app cards: " + cards)
     console.log("Etat de App currentPair: " + currentPair)
     console.log("état de indexMatched : " + indexmatched)
@@ -159,7 +173,10 @@ class App extends Component {
               onClick = {this.handleCardClick}
             />
           ))}
-        </div>       
+        </div>
+        {victory && (
+          <h2>!!! VICTORY !!!</h2>
+        )}       
       </div>
     )
     
