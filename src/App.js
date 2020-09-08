@@ -97,22 +97,30 @@ class App extends Component {
    * @param {*} index unique représentant la carte cliquée
    */
   handNewPairCloseBy(index){
+    console.log(" -----------------------------------------------Fonction handNewPairCloseBy début")
+
     const {cards, currentPair, indexmatched } = this.state
     const newPair = [currentPair[0], index]
     this.setState({currentPair: [newPair[0], newPair[1]]})
     
     // cartes identiques
     if (cards[newPair[0]] === cards[newPair[1]]) {
-
+      console.log("Cartes identiques")
       // les index des cartes trouvées sont rajoutés à la liste contenant tous les index trouvés (indexmatched)
       this.setState({indexmatched: [ ...indexmatched, ...newPair]})
       // currentPair[] est vidé
       this.setState({currentPair : []})
     } else{
+      console.log("cartes différentes")
       // currentPair[] est vidé après un certain temps pour que le joueur est le temps de visualisé les cartes
-      setTimeout(() => (this.setState({currentPair: []}), VISUAL_PAUSE_MSECS))
+      
+      setTimeout(() => {
+        console.log("TIMEOUT")
+        this.setState({currentPair: []})
+      }, VISUAL_PAUSE_MSECS);
     }
 
+    console.log("------------------------------------------------------------ Fonction handNewPairCloseBy fin")
   }
 
 
